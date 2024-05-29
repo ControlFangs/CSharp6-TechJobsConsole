@@ -61,7 +61,7 @@ List<Dictionary<string, string>> values = new List<Dictionary<string, string>>()
                 }
             }
             }
-              return values;
+              return values.Distinct().ToList();
         }
 
         /**
