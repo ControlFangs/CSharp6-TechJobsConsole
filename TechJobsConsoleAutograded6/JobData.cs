@@ -47,7 +47,21 @@ namespace TechJobsConsoleAutograded6
             // load data, if not already loaded
             LoadData();
 
-            return null;
+List<Dictionary<string, string>> values = new List<Dictionary<string, string>>();
+
+            foreach (Dictionary<string, string> job in AllJobs)
+            {
+            foreach(KeyValuePair<string, string> kvp in job){
+                
+                string BValue = kvp.Value;
+
+                if (BValue.ToLower().Contains(value.ToLower()))
+                {
+                    values.Add(job);
+                }
+            }
+            }
+              return values;
         }
 
         /**
@@ -57,7 +71,7 @@ namespace TechJobsConsoleAutograded6
          * For example, searching for employer "Enterprise" will include results
          * with "Enterprise Holdings, Inc".
          */
-        public static List<Dictionary<string, string>> FindByColumnAndValue(string column, string value)
+        public static   List<Dictionary<string, string>> FindByColumnAndValue(string column, string value)
         {
             // load data, if not already loaded
             LoadData();
@@ -66,11 +80,11 @@ namespace TechJobsConsoleAutograded6
 
             foreach (Dictionary<string, string> row in AllJobs)
             {
-                string aValue = row[column];
+                string  aValue = row[column];
 
 
                 //TODO: Make search case-insensitive
-                if (aValue.Contains(value))
+                if (aValue.ToLower().Contains(value.ToLower()))
                 {
                     jobs.Add(row);
                 }
@@ -82,6 +96,10 @@ namespace TechJobsConsoleAutograded6
         /*
          * Load and parse data from job_data.csv
          */
+       
+       
+        
+        
         private static void LoadData()
         {
 
@@ -103,7 +121,7 @@ namespace TechJobsConsoleAutograded6
                         rows.Add(rowArrray);
                     }
                 }
-            }
+        }
 
             string[] headers = rows[0];
             rows.Remove(headers);
